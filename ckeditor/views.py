@@ -10,7 +10,7 @@ from django.template import RequestContext
 
 from ckeditor import image_processing
 from ckeditor import utils
-
+from django import settings
 
 def get_upload_filename(upload_name, user):
     # If CKEDITOR_RESTRICT_BY_USER is True upload file to user specific path.
@@ -139,5 +139,6 @@ def is_image(path):
 def browse(request):
     context = RequestContext(request, {
         'files': get_files_browse_urls(request.user),
+        'STATICURL': settings.STATICURL
     })
     return render_to_response('browse.html', context)
